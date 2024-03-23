@@ -1,0 +1,40 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+
+// Supports weights 100-900
+import '@fontsource-variable/epilogue';
+// Supports weights 100-900
+import '@fontsource-variable/inter';
+import Header from '../components/Header.astro';
+---
+
+<!doctype html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Projeto desenvolvido por fãs para a Série Trine e outros games da Frozenbyte" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>{title}</title>
+	</head>
+	<body>
+		<Header />
+		<slot />
+	</body>
+</html>
+<style is:global>
+	html {
+		font-family: 'Inter Variable', sans-serif;
+		background: #09090B;
+		color: #71717A;
+	}
+
+	.text-title{
+		font-family: 'Epilogue Variable', sans-serif;
+		font-weight: 900;
+	}
+</style>
