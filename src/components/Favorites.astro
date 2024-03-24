@@ -1,12 +1,12 @@
 ---
-import HeartBorder from "../ui/HeartBorder.astro";
-
+import HeartTest from "../ui/HeartTest.astro";
 ---
 
 <div class="">
     <button 
     id="dropdownNotificationButton" 
     class="relative
+        z-10
         border
         p-3
         border-white
@@ -22,7 +22,7 @@ import HeartBorder from "../ui/HeartBorder.astro";
         dark:hover:text-white 
         dark:text-gray-400" 
     type="button">
-    <HeartBorder size="16" />
+    <HeartTest>
     <div class="absolute block w-6 h-6 bg-red-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">
         <span class="text-white text-[12px] font-bold relative">1</span>
     </div>
