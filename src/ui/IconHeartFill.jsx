@@ -5,7 +5,6 @@ export default function IconHeartFill({ size }) {
 		<svg
 			data-testid="geist-icon"
 			height={size}
-			stroke-linejoin="round"
 			viewBox={`0 0 ${size} ${size}`}
 			width={size}
 			style="color: currentcolor;">
