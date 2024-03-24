@@ -23,7 +23,7 @@ export default function SliderContent({
 		<>
 			<div className="absolute z-20 inset-0 w-full h-full flex flex-col items-center justify-center">
 				<div className="w-full max-w-[1216px] px-4 flex justify-between">
-					<div className="max-w-3xl flex flex-col">
+					<div className="max-w-3xl flex flex-col h-[400px] justify-between">
 						<h1 className="text-7xl font-bold text-white text-epilogue">
 							{nome}
 						</h1>
