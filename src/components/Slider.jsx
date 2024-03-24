@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -6,15 +6,33 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
+import "swiper/css/effect-fade";
 import "../styles/slider.css";
 
 // import required modules
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Autoplay, Pagination, Navigation, EffectFade } from "swiper/modules";
+import { api } from "../data/api";
+import SliderContent from "./SliderContent";
 
 export default function App() {
 	const progressCircle = useRef(null);
 	const progressContent = useRef(null);
+	const [slider, setSlider] = useState([]);
+	const [loading, setLoading] = useState(true);
+
+	const base_api = api;
+	const endpoint = "sliders";
+
+	useEffect(() => {
+		async function fetchData() {
+			const response = await fetch(base_api + endpoint);
+			const data = await response.json();
+			setSlider(data.sliders);
+			setLoading(false);
+		}
+		fetchData();
+	}, []);
+
 	const onAutoplayTimeLeft = (s, time, progress) => {
 		progressCircle.current.style.setProperty("--progress", 1 - progress);
 		progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
@@ -23,34 +41,45 @@ export default function App() {
 		<>
 			<Swiper
 				spaceBetween={30}
+				slidesPerView={1}
 				centeredSlides={true}
+				loop={true}
 				autoplay={{
-					delay: 2500,
+					delay: 5000,
 					disableOnInteraction: false,
 				}}
 				pagination={{
 					clickable: true,
 				}}
 				navigation={true}
-				modules={[Autoplay, Pagination, Navigation]}
+				modules={[Autoplay, Pagination, Navigation, EffectFade]}
+				effect="fade"
 				onAutoplayTimeLeft={onAutoplayTimeLeft}
 				className="mySwiper overflow-hidden">
-				<SwiperSlide className="">
-					<img
-						className="min-h-[768px] object-cover"
-						src="https://www.hyperhype.es/wp-content/uploads/2019/12/Deathwing_Key_Art-scaled-e1575544364525.jpg"
-					/>
-				</SwiperSlide>
-				<SwiperSlide className="">
-					<img
-						className="min-h-[768px] object-cover"
-						src="https://sun9-8.userapi.com/impf/vqncdMCRid5h4McGn_Ovn3g_rUa8FRtZFhj5Jw/EERmUmn6rz4.jpg?size=1920x768&quality=95&crop=0,69,1902,759&sign=879521b17e7b0df6684cf9fca08dc3e8&type=cover_group"
-						alt=""
-					/>
-				</SwiperSlide>
+				{slider.map((item) => (
+					<SwiperSlide key={item.id}>
+						<SliderContent
+							id={item.id}
+							nome={item.nome}
+							descricao={item.descricao}
+							slug={item.slug}
+							categoria_principal={item.categoria_principal}
+							traducao={item.traducao}
+							nota={item.nota}
+							classificacao={item.classificacao}
+							indicacao={item.indicacao}
+							imagem={item.imagem}
+						/>
+					</SwiperSlide>
+				))}
 
-				<div className="autoplay-progress" slot="container-end">
-					<svg viewBox="0 0 48 48" ref={progressCircle}>
+				<div
+					className="autoplay-progress absolute right-[32px] bottom-[32px] z-10 w-[48px] h-[48px] flex items-center justify-center font-bold"
+					slot="container-end">
+					<svg
+						className="absolute left-[0] top-0 z-10 w-full h-full stroke-[4px] -rotate-90"
+						viewBox="0 0 48 48"
+						ref={progressCircle}>
 						<circle cx="24" cy="24" r="20"></circle>
 					</svg>
 					<span ref={progressContent}></span>
