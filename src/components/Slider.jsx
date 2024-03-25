@@ -74,7 +74,7 @@ export default function App() {
 				))}
 
 				<div
-					className="autoplay-progress absolute right-[32px] bottom-[32px] z-10 w-[48px] h-[48px] flex items-center justify-center font-bold"
+					className="autoplay-progress absolute right-[32px] 2xl:right-96 bottom-[32px] 2xl:bottom-40 z-10 w-[48px] h-[48px] flex items-center justify-center font-bold"
 					slot="container-end">
 					<svg
 						className="absolute left-[0] top-0 z-10 w-full h-full stroke-[4px] -rotate-90"

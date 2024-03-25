@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import IconExplorar from "../ui/IconExplorar";
 import IconHeartBorder from "../ui/IconHeartBorder";
 import IconLike from "../ui/IconLike";
+import IconBrazil from "./../ui/IconBrazil";
 
 export default function SliderContent({
 	id,
@@ -15,16 +16,12 @@ export default function SliderContent({
 	indicacao,
 	imagem,
 }) {
-	const [portugues, setPortugues] = useState("");
-
-	console.log(traducao);
-
 	return (
 		<>
 			<div className="absolute z-20 inset-0 w-full h-full flex flex-col items-center justify-center">
 				<div className="w-full max-w-[1216px] px-4 flex justify-between">
 					<div className="max-w-3xl flex flex-col h-[400px] justify-between">
-						<h1 className="text-7xl font-bold text-white text-epilogue">
+						<h1 className="text-7xl font-bold text-white text-title">
 							{nome}
 						</h1>
 						<div className="max-w-2xl mb-6">
@@ -42,13 +39,13 @@ export default function SliderContent({
 										traducao.map((item, index) => (
 											<li
 												key={index}
-												className="bg-indigo-600 text-sm font-semibold py-1 px-3 rounded text-indigo-300">
-												{item}
+												className="bg-indigo-600 text-sm font-semibold py-1 px-3 rounded text-indigo-300 flex gap-1 items-center">
+												{item} <IconBrazil />
 											</li>
 										))
 									) : (
-										<li className="bg-indigo-600 text-sm font-semibold py-1 px-3 rounded text-indigo-300">
-											{traducao}
+										<li className="bg-indigo-600 text-sm font-semibold py-1 px-3 rounded text-indigo-300 flex gap-1 items-center">
+											{traducao} <IconBrazil />
 										</li>
 									)}
 								</ul>
@@ -92,7 +89,10 @@ export default function SliderContent({
 				</div>
 			</div>
 			<div className="bg-gradient-to-t h-full min-h-[768px] object-cover absolute z-10 w-full from-zinc-950 via-zinc-950/30 to-zinc-950"></div>
-			<img className=" w-full h-[768px] object-cover" src={imagem} />
+			<img
+				className="w-full h-[768px] object-cover backdrop-blur-lg"
+				src={imagem}
+			/>
 		</>
 	);
 }
