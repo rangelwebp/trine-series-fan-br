@@ -1,0 +1,187 @@
+---
+import { api } from '../../data/api';
+import Layout from '../../layouts/Layout.astro';
+import BtnWhite from '../../ui/BtnWhite';
+import Container from '../../ui/Container.astro';
+import ContainerReduced from '../../ui/ContainerReduced.astro';
+import IconHeartBorder from '../../ui/IconHeartBorder';
+import Tag from '../../ui/Tag';
+import Gallery from '../../components/Gallery'
+import GalleryItem from '../../components/GalleryItem'
+import { Image } from 'astro:assets';
+
+// export async function getStaticPaths() {
+//     const games = [
+//         { "slug": "boreal-blade" },
+//         { "slug": "has-been-heroes" },
+//         { "slug": "jack-claw" },
+//         { "slug": "nine-parchments" },
+//         { "slug": "shadowgrounds" },
+//         { "slug": "shadowgrounds-survivor" },
+//         { "slug": "shadwen" },
+//         { "slug": "starbase" },
+//         { "slug": "trine-2" },
+//         { "slug": "trine-3-the-artifacts-of-power" },
+//         { "slug": "trine-4-melody-of-mystery" },
+//         { "slug": "trine-4-nightmare-prince" },
+//         { "slug": "trine-5-a-clockwork-conspiracy" },
+//         { "slug": "trine-enchanted-edition" }
+//     ];
+
+//     return games.map(game => ({
+//         params: { slug: game.slug },
+//     }));
+// }
+
+export async function getStaticPaths() {
+    // URL da API para buscar os jogos
+    const base_api = api;
+    const endpoint = "games";
+
+    try {
+        // Fazendo a requisição para a API e buscando os dados
+        const response = await fetch(base_api + endpoint);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch games data: ${response.statusText}`);
+        }
+        const data = await response.json();
+
+        // Mapeando os slugs dos jogos para o formato esperado pelo Astro
+        const paths = data.games.map(game => ({
+            params: { slug: game.slug },
+        }));
+
+        // Retorna diretamente o array de paths, conforme esperado pelo Astro
+        return paths;
+    } catch (error) {
+        console.error('Error fetching games data:', error);
+        // Em caso de falha, retorna um array vazio para evitar erros de build
+        return [];
+    }
+}
+
+async function getGameBySlug(slug) {
+    const base_api = api;
+    const endpoint = "game/" + slug;
+
+    const response = await fetch(base_api + endpoint);
+    if (!response.ok) {
+        throw new Error(`API call failed with status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+}
+
+const { slug } = Astro.params;
+let game = null;
+
+if (slug) {
+    game = await getGameBySlug(slug);
+}
+let items;
+
+if(game.galeria){
+    const galeria = true;
+    items = game.galeria.map((item, index) => (
+        item.guid
+    ));
+}
+
+---
+
+
+<Layout title={game.nome}>
+    <div class="relative">
+       <Container>
+        <div class="relative w-full">
+            <div class="w-full absolute z-20 mt-[308px]">
+                <div>
+                    <h1 class="text-4xl text-title text-white mb-6">{game.nome}</h1>
+                </div>
+                <div class="flex gap-8 items-start justify-between ">
+                    <div class="max-w-[1008px] flex gap-8">
+                        <div class="thumbnail">
+                            <img class="w-[384px] h-[180px] object-cover rounded shadow-lg" src={`${game.thumbnail}`} alt={game.nome}>
+                        </div>
+                        <div class="gap-8">
+                            <div class="flex gap-8">
+                                <div class="text-white w-[280px] flex flex-col gap-4">
+                                    <div>
+                                        <strong class="inline-block text-sm pb-4">CATEGORIA</strong>
+                                        <p class="pb-4 text-sm">{game.categorias}</p>
+                                        <span class="inline-block pb-4">
+                                            <Tag>{game.nota}</Tag>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="text-white w-[280px] flex flex-col gap-4">
+                                    <div>
+                                        <strong class="inline-block text-sm pb-4">PLATAFORMAS</strong>
+                                        <p class="text-sm">{game.plataformas}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-8">
+                                <div class="w-[280px]">
+                                    <BtnWhite href="#" titulo="Adicionar aos favoritos">
+                                        <IconHeartBorder size={16} />
+                                    </BtnWhite>
+                                </div>
+                                <div>
+                                    <span class="lancamento">
+                                        <strong class="text-white text-sm mb-4">LANÇANDO EM {game.lancamento}</strong>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="classificacao">
+                        <div class="flex flex-col items-center max-w-24 text-center">
+                            <span class="text-white text-sm mb-2">
+                                Classificação
+                            </span>
+                            <div class="bg-blue-500 h-[72px] w-[72px] flex justify-center items-center rounded">
+                                <span class="text-white font-bold text-3xl">
+                                    {game.classificacao}
+                                </span>
+                            </div>
+                            <span class="text-white text-sm mt-1">
+                                {game.indicacao}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       </Container>
+       <div class="pointer-events-none bg-gradient-to-t h-full min-h-[635px] object-cover absolute z-10 w-full from-zinc-950 via-zinc-950/30 to-zinc-950"></div>
+        <img class="w-full h-[635px] object-cover backdrop-blur-lg" src={game.capa} />
+    </div>
+    <ContainerReduced>
+        <div class="mt-32">
+            <div class="flex gap-32">
+                <div>
+                    <h3 class="text-gray-300 text-[32px] text-title mb-8">Release</h3>
+                    <article>
+                        <p class="text-white leading-8 text-balance">{game.descricao}</p>
+                    </article>
+                </div>
+                <div>
+                    <figure class="w-[383px] h-[365px]">
+                        <img class="w-[383px] h-[365px] rounded object-cover" src={game.capa} alt={game.nome}>
+                    </figure>
+                </div>
+            </div>
+        </div>
+        <hr class="border-zinc-800 mt-24 mb-24" />
+        <div class="mt-12">
+            <iframe class="w-full aspect-video rounded" src={`https://www.youtube.com/embed/${game.video.slice(32)}`} title={`Vídeo do Youtube do ${game.nome}`} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        { items && ( <hr class="border-zinc-800 mt-24 mb-24"/> )}
+    </ContainerReduced>
+    {items && (
+        <div class="mt-12">
+            <Gallery client:only="react" sliders={items} />      
+        </div>
+    )}
+</Layout>
