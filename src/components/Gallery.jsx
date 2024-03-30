@@ -18,6 +18,24 @@ export default function Gallery({ sliders }) {
 			<Swiper
 				spaceBetween={32}
 				slidesPerView={5}
+				breakpoints={{
+					320: {
+						slidesPerView: 1,
+						centeredSlides: true,
+					},
+					640: {
+						slidesPerView: 2,
+					},
+					768: {
+						slidesPerView: 3,
+					},
+					1281: {
+						slidesPerView: 4,
+					},
+					1441: {
+						slidesPerView: 5,
+					},
+				}}
 				loop={true}
 				autoplay={{
 					delay: 5000,
