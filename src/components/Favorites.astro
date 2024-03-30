@@ -3,7 +3,8 @@ import IconHeartBorder from "../ui/IconHeartBorder";
 ---
 
 <div class="">
-    <button 
+    <button
+    onclick="dropdownNotification.classList.toggle('hidden')"
     id="dropdownNotificationButton" 
     class="relative
         z-10
@@ -61,11 +62,5 @@ import IconHeartBorder from "../ui/IconHeartBorder";
 </div>
 
 
-<script>
-    const dropdownNotificationButton = document.getElementById('dropdownNotificationButton');
 
-    dropdownNotificationButton.addEventListener('click', () => {
-        const dropdownNotification = document.getElementById('dropdownNotification');
-        dropdownNotification.classList.toggle('hidden');
-    })
-</script>
+
