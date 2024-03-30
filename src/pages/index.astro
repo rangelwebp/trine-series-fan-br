@@ -1,5 +1,7 @@
 ---
 import Slider from '../components/Slider';
+import Trines from '../components/Trines';
+import Games from '../components/Games';
 import Layout from '../layouts/Layout.astro';
 import Container from '../ui/Container.astro';
 
@@ -9,11 +11,9 @@ import Container from '../ui/Container.astro';
 	<Slider client:only="react" />
 	<main>
 		<Container>
-			
+			<Trines client:only="react" />
+			<Games client:only="react" />
 		</Container>
+
 	</main>
 </Layout>
-
-<style>
-		
-</style>
