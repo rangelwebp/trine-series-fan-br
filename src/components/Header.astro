@@ -1,6 +1,7 @@
 ---
 import Container from "../ui/Container.astro";
 import Favorites from "./Favorites.astro";
+import FavoritesJSX from "./Favorites";
 import NavItem from "./NavItem.astro";
 
 const items = [
@@ -31,7 +32,8 @@ const items = [
             </nav>
 
             <div>
-                <Favorites />
+                <!-- <Favorites transition:persist  /> -->
+                <FavoritesJSX client:only="react" />
             </div>
         </div>
     </Container>

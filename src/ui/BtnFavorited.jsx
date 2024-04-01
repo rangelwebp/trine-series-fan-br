@@ -4,9 +4,10 @@ import IconHeartFill from "./IconHeartFill";
 export default function BtnFavorited({ gameId, onFavoriteChange }) {
 	const handleClick = () => {
 		let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-		favorites = favorites.filter((favorite) => favorite !== gameId);
+		// Remove o jogo especificado dos favoritos
+		favorites = favorites.filter((favorite) => favorite.gameId !== gameId);
 		localStorage.setItem("favorites", JSON.stringify(favorites));
-		onFavoriteChange(); // Chamar o callback
+		onFavoriteChange(); // Notifica o componente pai para atualizar o estado/UI
 	};
 
 	return (
