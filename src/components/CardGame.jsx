@@ -29,6 +29,7 @@ export default function CardGame({ href, gameId, img, titulo, nota }) {
 				) : (
 					<BtnFavorite
 						gameId={gameId}
+						titulo={titulo}
 						onFavoriteChange={handleFavoriteChange}
 					/>
 				)}
