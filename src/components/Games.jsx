@@ -28,7 +28,7 @@ export default function Games() {
 						gameId={item.id}
 						href={"/game/" + item.slug}
 						img={item.thumb}
-						titulo={item.id + " - " + item.nome}
+						titulo={item.nome}
 						nota={item.nota}
 					/>
 				))}
