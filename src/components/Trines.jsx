@@ -38,6 +38,18 @@ export default function Trines() {
 				<Swiper
 					slidesPerView={3}
 					spaceBetween={32}
+					breakpoints={{
+						320: {
+							slidesPerView: 1,
+							centeredSlides: true,
+						},
+						640: {
+							slidesPerView: 2,
+						},
+						1024: {
+							slidesPerView: 3,
+						},
+					}}
 					loop={true}
 					modules={[Navigation, EffectFade]}
 					navigation={{

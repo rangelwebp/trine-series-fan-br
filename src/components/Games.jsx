@@ -21,7 +21,7 @@ export default function Games() {
 	return (
 		<div className="w-full pt-16 border-t border-zinc-800 mt-28">
 			<TitleSection>Outros jogos da Frozenbyte</TitleSection>
-			<div className="grid grid-cols-3 gap-8">
+			<div className="grid grid-cols-2 md:grid-cols-3 gap-8">
 				{game.map((item) => (
 					<CardGame
 						key={item.id}

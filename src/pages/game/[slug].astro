@@ -92,18 +92,18 @@ if(game.galeria){
     <div class="relative">
        <Container>
         <div class="relative w-full">
-            <div class="w-full absolute z-20 mt-[308px]">
+            <div class="w-full absolute z-20 mt-44 md:mt-[308px]">
                 <div>
                     <h1 class="text-4xl text-title text-white mb-6">{game.nome}</h1>
                 </div>
                 <div class="flex gap-8 items-start justify-between ">
-                    <div class="max-w-[1008px] flex gap-8">
+                    <div class="max-w-full md:max-w-[1008px] flex flex-col md:flex-row gap-8">
                         <div class="thumbnail">
                             <img class="w-[384px] h-[180px] object-cover rounded shadow-lg" src={`${game.thumbnail}`} alt={game.nome}>
                         </div>
                         <div class="gap-8">
                             <div class="flex gap-8">
-                                <div class="text-white w-[280px] flex flex-col gap-4">
+                                <div class="text-white md:w-[280px] flex flex-col gap-4">
                                     <div>
                                         <strong class="inline-block text-sm pb-4">CATEGORIA</strong>
                                         <p class="pb-4 text-sm">{game.categorias}</p>
@@ -112,7 +112,7 @@ if(game.galeria){
                                         </span>
                                     </div>
                                 </div>
-                                <div class="text-white w-[280px] flex flex-col gap-4">
+                                <div class="text-white md:w-[280px] flex flex-col gap-4">
                                     <div>
                                         <strong class="inline-block text-sm pb-4">PLATAFORMAS</strong>
                                         <p class="text-sm">{game.plataformas}</p>
@@ -120,7 +120,7 @@ if(game.galeria){
                                 </div>
                             </div>
                             <div class="flex items-center gap-8">
-                                <div class="w-[280px]">
+                                <div class="md:w-[280px]">
                                     <BtnWhite href="#" titulo="Adicionar aos favoritos">
                                         <IconHeartBorder size={16} />
                                     </BtnWhite>
@@ -157,16 +157,16 @@ if(game.galeria){
     </div>
     <ContainerReduced>
         <div class="mt-32">
-            <div class="flex gap-32">
-                <div>
+            <div class="flex flex-col md:flex-row gap-8 md:gap-32">
+                <div class="order-2 md:order-1">
                     <h3 class="text-gray-300 text-[32px] text-title mb-8">Release</h3>
                     <article>
                         <p class="text-white leading-8 text-balance">{game.descricao}</p>
                     </article>
                 </div>
-                <div>
-                    <figure class="w-[383px] h-[365px]">
-                        <img class="w-[383px] h-[365px] rounded object-cover" src={game.capa} alt={game.nome}>
+                <div class="order-1 md:order-2">
+                    <figure class="w-full md:w-[383px] h-[365px]">
+                        <img class="w-full md:w-[383px] h-[365px] rounded object-cover" src={game.capa} alt={game.nome}>
                     </figure>
                 </div>
             </div>
