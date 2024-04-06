@@ -1,9 +1,10 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import Container from '../ui/Container.astro';
 import Slider from '../components/Slider';
 import Trines from '../components/Trines';
 import Games from '../components/Games';
-import Layout from '../layouts/Layout.astro';
-import Container from '../ui/Container.astro';
+import Mods from '../components/Mods';
 
 ---
 
@@ -13,6 +14,7 @@ import Container from '../ui/Container.astro';
 		<Container>
 			<Trines client:only="react" />
 			<Games client:only="react" />
+			<Mods client:only="react" />
 		</Container>
 
 	</main>

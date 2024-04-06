@@ -85,6 +85,12 @@ if(game.galeria){
     ));
 }
 
+// let complemento = null;
+
+// if(game.complemento === '1'){
+//     let complemento = true;
+// }
+
 ---
 
 
@@ -94,7 +100,9 @@ if(game.galeria){
         <div class="relative w-full">
             <div class="w-full absolute z-20 mt-44 md:mt-[308px]">
                 <div>
-                    <h1 class="text-4xl text-title text-white mb-6">{game.nome}</h1>
+                    <h1 class="text-4xl text-title text-white mb-6 flex items-center gap-2">{game.nome} { game.complemento === '1' && (
+                        <small class="text-base font-normal uppercase bg-blue-500 text-white py-1 px-2 rounded">Mod</small>
+                    )}</h1>
                 </div>
                 <div class="flex gap-8 items-start justify-between ">
                     <div class="max-w-full md:max-w-[1008px] flex flex-col md:flex-row gap-8">
