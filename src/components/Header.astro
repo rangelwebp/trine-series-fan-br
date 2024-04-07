@@ -1,15 +1,8 @@
 ---
 import Container from "../ui/Container.astro";
-import Favorites from "./Favorites.astro";
 import FavoritesJSX from "./Favorites";
 import NavItem from "./NavItem.astro";
-
-const items = [
-    {"title": "Jogos", "href": "#", "dropdown": false},
-    {"title": "Complementos", "href": "#", "dropdown": true},
-    {"title": "Frozenbyte", "href": "#", "dropdown": false},
-    {"title": "Press", "href": "#", "dropdown": false}
-];
+import { navItemLinks } from './NavItemLinks.astro';
 
 ---
 
@@ -19,9 +12,9 @@ const items = [
             <a href="/">
                 <img src="/assets/logo-main.svg" alt="Logo Trine Series Fan Br">
             </a>
-            <nav class="flex gap-[72px] hidden md:flex md:gap-10">
+            <nav class="gap-[72px] hidden md:flex md:gap-10">
                 {
-                    items.map(item => 
+                    navItemLinks.map(item => 
                         <NavItem 
                             classes="text-white/70 hover:text-white flex gap-2 items-center uppercase font-semibold transition"
                             href={item.href} 
