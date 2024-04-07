@@ -1,0 +1,62 @@
+---
+import Games from "../components/Games"
+import Layout from "../layouts/Layout.astro"
+import Container from "../ui/Container.astro"
+import { api } from "../data/api"
+
+
+---
+
+<script>
+    let gamesFavorites = await JSON.parse(localStorage.getItem('favorites'));
+
+    let gamesFavoritesList = [];
+
+    gamesFavorites.map((jogo) => {
+        gamesFavoritesList.push(jogo.gameId);
+    })
+
+    let games = await fetch('https://myapis.testar.be/wp-json/games/v1/games').then(response => response.json());
+    
+    let gamesFavoritesListFilter = games.games.filter((jogo) => {
+        return gamesFavoritesList.includes(jogo.id);
+    });
+
+    const $gameList = document.querySelector('.game-list');
+    gamesFavoritesListFilter.map((gameFilter) =>{
+        document.querySelector('.game-list').innerHTML +=
+        `
+        <div class="game-list-item flex items-center gap-8 px-0 py-8">
+            <figure class="game-list-item-img">
+                <a href="/game/${gameFilter.slug}">
+                    <img class="h-[180px] w-[360px] object-cover w-full rounded opacity-100 hover:opacity-50 cursor-pointer transition-all duration-500" src="${gameFilter.thumb}" alt="${gameFilter.nome}">
+                </a>
+            </figure>
+            <article>
+                <h3 class="text-title text-white text-3xl">${gameFilter.nome}
+                </h3>
+                <p>${gameFilter.nota}</p>
+            </article>
+        </div>
+        `
+        
+    })
+   
+</script>
+
+<Layout title="Jogos favoritados">
+    <main class="wp-full block pt-40">
+        <Container>
+            <div class="relative">
+                <div class="">
+                    <h1 class="text-4xl text-title text-white">Jogos favoritados</h1>
+                </div>
+            </div>
+            <div class="w-full">
+                <div class="game-list flex flex-col divide-y divide-gray-100 dark:divide-gray-700">
+                   
+                </div>
+            </div>
+        </Container>
+    </main>
+</Layout>
