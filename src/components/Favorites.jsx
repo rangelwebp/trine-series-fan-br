@@ -66,7 +66,7 @@ export default function Favorites() {
 							))}
 						</div>
 						<a
-							href="#"
+							href="/favorites"
 							className="block py-2 text-sm font-medium text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white">
 							<div className="inline-flex items-center ">
 								<svg
@@ -77,7 +77,7 @@ export default function Favorites() {
 									viewBox="0 0 20 14">
 									<path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
 								</svg>
-								View all
+								Veja todos
 							</div>
 						</a>
 					</div>
