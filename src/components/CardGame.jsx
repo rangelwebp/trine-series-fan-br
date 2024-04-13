@@ -9,11 +9,6 @@ export default function CardGame({ href, gameId, img, titulo, nota }) {
 
 	const [isFavorited, setIsFavorited] = useState(false);
 
-	// useEffect(() => {
-	// 	const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-	// 	setIsFavorited(favorites.includes(gameId));
-	// }, [gameId]);
-
 	useEffect(() => {
 		const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 		// Atualiza a lógica para verificar se o gameId atual está na lista de favoritos
