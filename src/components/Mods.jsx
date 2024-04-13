@@ -5,6 +5,7 @@ import TitleSection from "../ui/TitleSection";
 
 export default function Mods() {
 	const [game, setGame] = useState([]);
+	const [loading, setLoading] = useState(true);
 
 	const base_api = api;
 	const mods = "mods";
@@ -14,6 +15,7 @@ export default function Mods() {
 			const response = await fetch(base_api + mods);
 			const data = await response.json();
 			setGame(data.mods);
+			setLoading(false);
 		}
 		fetchData();
 	}, []);

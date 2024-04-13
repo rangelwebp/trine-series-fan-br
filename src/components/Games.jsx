@@ -5,6 +5,7 @@ import TitleSection from "../ui/TitleSection";
 
 export default function Games() {
 	const [game, setGame] = useState([]);
+	const [loading, setLoading] = useState(true);
 
 	const base_api = api;
 	const anothers_games = "anothers";
@@ -14,6 +15,7 @@ export default function Games() {
 			const response = await fetch(base_api + anothers_games);
 			const data = await response.json();
 			setGame(data.games);
+			setLoading(false);
 		}
 		fetchData();
 	}, []);
