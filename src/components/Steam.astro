@@ -2,7 +2,7 @@
 import BtnWhite from "../ui/BtnWhite";
 import Container from "../ui/Container.astro";
 import TagGreen from "../ui/TagGreen";
-
+import { links } from '../data/links';
 ---
 
 <div class="w-full mt-32">
@@ -13,7 +13,7 @@ import TagGreen from "../ui/TagGreen";
                     <h3 class="text-title text-white text-[32px]">Compre na Steam</h3>
                     <p class="text-white mb-6 max-w-[329px]">Siga nosso perfil e compre nossos games na maior loja de games do mundo</p>
                     <div class="flex gap-2 items-center">
-                        <BtnWhite href={"#"} titulo="Compre agora">
+                        <BtnWhite href={links.steam} titulo="Compre agora">
                             <img src="/assets/icon-steam.svg" alt="Steam">
                         </BtnWhite>
                         <TagGreen>+7,882 followers</TagGreen>
